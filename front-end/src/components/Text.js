@@ -1,16 +1,18 @@
-import { useState } from "react"
-const typing = require("../utils/typing")
+import { useState } from "react";
+import Timer from "./Timer";
+const typing = require("../utils/typing");
 
 function Text() {
-    const [text, setText] = useState("")
-    function getTyping() {
-        typing()
-    }
-    return (
-        <div className="Text">
-            {text}
-            {text === "" ? (<button onClick={getTyping}>Lets start</button>) : ""}
-        </div>
-    );
+  const [isClicked, setIsClicked] = useState(false);
+  function getTyping() {
+    typing();
+    setIsClicked(true);
+  }
+  return (
+    <div className="Text">
+      <button onClick={getTyping}>Lets start</button>
+      {isClicked ? <Timer /> : " "}
+    </div>
+  );
 }
-export default Text
+export default Text;
