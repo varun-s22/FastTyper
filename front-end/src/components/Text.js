@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import getText from "../utils/getText"
 
-function Text() {
+const Text = (props) => {
     const [text, setText] = useState(null)
     const [enteredText, setEnteredText] = useState(null)
     const [isTyping, setIsTyping] = useState(false)
@@ -22,11 +22,11 @@ function Text() {
         if (!isTyping) {
             setStartTime(Date.now())
             setIsTyping(true)
-            let timeBtn = document.querySelector(".timeStartBtn")
-            timeBtn.click()
+            props.startTimer()
         }
         if (currentKeyPressed === "~") {
             setIsTyping(false)
+            props.stopTimer()
             let duration = (Date.now() - startTime) / (60 * 1000)
             let words = text.split(" ")
             let ans = Math.floor(words.length / duration)
