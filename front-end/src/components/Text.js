@@ -1,13 +1,15 @@
 import { useEffect, useState, useRef } from "react"
+import { getClassName, isCorrect } from "../utils/index"
+import getScore from "../utils/getScore"
 import getText from "../utils/getText"
 
 const Text = (props) => {
     const [text, setText] = useState(null)
     const [enteredText, setEnteredText] = useState(null)
+    const [correctChar, setCorrectChar] = useState(0)
     const [isTyping, setIsTyping] = useState(false)
     const [startTime, setStartTime] = useState(0)
-    const [correctChar, setCorrectChar] = useState(0)
-    const [userWPM, setUserWPM] = useState(0)
+    const [userWPM, setUserWPM] = useState(false)
     const focusRef = useRef(null)
     useEffect(() => {
         const fetchText = async () => {
@@ -19,33 +21,26 @@ const Text = (props) => {
     const keyEventHandler = (e) => {
         let currentKeyPressed = e.nativeEvent.data
 
-        if (!isTyping) {
-            setStartTime(Date.now())
-            setIsTyping(true)
-            props.startTimer()
-        }
-        if (currentKeyPressed === "~") {
-            setIsTyping(false)
-            props.stopTimer()
-            let duration = (Date.now() - startTime) / (60 * 1000)
-            let words = text.split(" ")
-            let ans = Math.floor(words.length / duration)
-            setUserWPM(ans)
-        }
+        setUserWPM(
+            getScore(
+                isTyping,
+                setIsTyping,
+                startTime,
+                setStartTime,
+                text,
+                currentKeyPressed,
+                props.startTimer,
+                props.stopTimer
+            )
+        )
         setEnteredText(e.target.value)
-        if (isCorrect(currentKeyPressed, correctChar)) {
+        if (isCorrect(text, currentKeyPressed, correctChar)) {
             setCorrectChar(correctChar + 1)
         }
     }
-    const getClassName = (char, i) => {
-        return isCorrect(char, i) ? "correct" : "wrong"
-    }
-    const isCorrect = (char, i) => {
-        return text[i] === char
-    }
     const spans = enteredText?.split("").map((char, i) => (
-        <span key={i} className={getClassName(char, i)}>
-            {!isCorrect(char, i) && char === " " ? "_" : char}
+        <span key={i} className={getClassName(text, char, i)}>
+            {!isCorrect(text, char, i) && char === " " ? "_" : char}
         </span>
     ))
     return (
