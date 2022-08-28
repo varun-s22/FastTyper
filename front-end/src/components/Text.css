@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
+
+.Text{
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 1.8em;
+    line-height: 1.3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    color: gray;
+    outline: none;
+    width: 40vw;
+    text-align: justify;
+}
+.correct{
+    color: green;
+    background-color: white;
+}
+.wrong{
+    color: red;
+    background-color: white;
+}
+.hidden{
+    position: relative;
+    z-index: -1;
+    left:-1000%;
+}
+.enteredText{
+    inset: 0 0;
+    position: absolute;
+    color: black;
+}

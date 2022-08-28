@@ -1,12 +1,8 @@
 import "./App.css"
-import Write from "./components/Write"
+import Router from "./components/Router"
 
 function App() {
-    return (
-        <div className="App">
-            <Write />
-        </div>
-    )
+    return <Router />
 }
 
 export default App
