@@ -5,40 +5,44 @@ const GoogleStategy = require("passport-google-oidc");
 const path = require("path");
 const session = require("express-session");
 const { createConn } = require("./sqlz");
-const { User } = require("./sqlz/models/user");
+const authRoutes = require("./routes/auth");
+const verify = require("./sqlz/utils/index");
+const cors = require("cors");
 const { Score } = require("./sqlz/models/score");
 
 require("dotenv").config();
 const port = process.env.PORT;
+app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 createConn();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-app.set("view engine", "html");
-const verify = async (issuer, profile, cb) => {
-  console.log("logged in");
-  const jane = User.build({
-    name: "Jane",
-    userID: "12",
-    email: "helo@world.com",
-  });
-  const scores = Score.build({
-    id: "12",
-    wpm: 12,
-    date: new Date(),
-  });
-  console.log(jane instanceof User); // true
-  console.log(jane);
-  console.log(scores);
-  console.log({ profile, issuer });
-  console.log(profile.emails);
-};
 app.use(
   session({
-    secret: "thisbetterbeagoodsecret",
+    secret: process.env.SESSION_SECRET,
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
+console.log(process.env.WEBSITE);
+
+passport.serializeUser(function (user, cb) {
+  process.nextTick(function () {
+    return cb(null, { id: user.userID, username: user.email, name: user.name });
+  });
+});
+
+passport.deserializeUser(function (user, cb) {
+  process.nextTick(function () {
+    return cb(null, user);
+  });
+});
 passport.use(
   new GoogleStategy(
     {
@@ -50,17 +54,8 @@ passport.use(
     verify
   )
 );
-app.get("/", (req, res) => {
-  res.render("index.html");
-});
-app.get("/login/federated/google", passport.authenticate("google"));
-app.get(
-  "/oauth2/redirect/google",
-  passport.authenticate("google", {
-    successReturnToOrRedirect: "/",
-    failureRedirect: "/login",
-  })
-);
+
+app.use("/", authRoutes);
 app.listen(port, () => {
   console.log(`Connected to port ${port}`);
 });
