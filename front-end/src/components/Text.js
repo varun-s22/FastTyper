@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react"
-import { getClassName, isCorrect } from "../utils/index"
+import { getClassName, isCorrect, newUserLogin } from "../utils/index"
 import getScore from "../utils/getScore"
 import getText from "../utils/getText"
 import "./Text.css"
