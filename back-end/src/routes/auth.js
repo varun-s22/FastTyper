@@ -15,11 +15,10 @@ router.post("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect(`${process.env.WEBSITE}`);
+    res.status(200).send({ msg: "Logged out" });
   });
 });
 router.get("/user", (req, res) => {
-  console.log(req.user);
   res.send(req.user ?? {});
 });
 module.exports = router;

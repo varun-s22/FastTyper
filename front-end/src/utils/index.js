@@ -23,8 +23,13 @@ const getUserDetails = async () => {
 }
 const logOut = async () => {
     try {
-        let res = await axios.post(`${process.env.REACT_APP_HOST}/logout`)
-        console.log(res.data)
+        let res = await axios.post(
+            `${process.env.REACT_APP_HOST}/logout`,
+            null,
+            {
+                withCredentials: true,
+            }
+        )
         return res
     } catch (e) {
         console.log(e)

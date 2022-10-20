@@ -8,6 +8,7 @@ const Home = () => {
     }
     let logOutUser = async () => {
         await logOut()
+        setLoggedInUser("")
     }
     useEffect(() => {
         let getData = async () => {
