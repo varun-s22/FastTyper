@@ -5,7 +5,7 @@ const isCorrect = (text, char, i) => {
 const getClassName = (text, char, i) => {
     return isCorrect(text, char, i) ? "correct" : "wrong"
 }
-const newUserLogin = async () => {
+const login = () => {
     window.location.href = `${process.env.REACT_APP_HOST}/login/federated/google`
 }
 const getUserDetails = async () => {
@@ -21,7 +21,7 @@ const getUserDetails = async () => {
         console.log(e)
     }
 }
-const logOut = async () => {
+const logout = async () => {
     try {
         let res = await axios.post(
             `${process.env.REACT_APP_HOST}/logout`,
@@ -35,4 +35,4 @@ const logOut = async () => {
         console.log(e)
     }
 }
-export { isCorrect, getClassName, newUserLogin, getUserDetails, logOut }
+export { isCorrect, getClassName, login, logout, getUserDetails }

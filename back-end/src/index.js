@@ -1,12 +1,10 @@
 const express = require("express");
 const app = express();
 const passport = require("passport");
-const GoogleStategy = require("passport-google-oidc");
 const path = require("path");
 const session = require("express-session");
 const { createConn } = require("./sqlz");
 const authRoutes = require("./routes/auth");
-const verify = require("./sqlz/utils/index");
 const cors = require("cors");
 const { Score } = require("./sqlz/models/score");
 
@@ -31,29 +29,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 console.log(process.env.WEBSITE);
-
-passport.serializeUser(function (user, cb) {
-  process.nextTick(function () {
-    return cb(null, { id: user.userID, username: user.email, name: user.name });
-  });
-});
-
-passport.deserializeUser(function (user, cb) {
-  process.nextTick(function () {
-    return cb(null, user);
-  });
-});
-passport.use(
-  new GoogleStategy(
-    {
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "/oauth2/redirect/google",
-      scope: ["profile", "email"],
-    },
-    verify
-  )
-);
 
 app.use("/", authRoutes);
 app.listen(port, () => {

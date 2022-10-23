@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { newUserLogin, getUserDetails, logOut } from "../utils"
+import { getUserDetails, login, logout } from "../utils"
 const Home = () => {
     const [loggedInUser, setLoggedInUser] = useState("")
-    let loginHandler = () => {
-        newUserLogin()
+    let loginHandler = async () => {
+        await login()
     }
-    let logOutUser = async () => {
-        await logOut()
+    let logoutHandler = async () => {
+        await logout()
         setLoggedInUser("")
     }
     useEffect(() => {
-        let getData = async () => {
+        let userDetails = async () => {
             try {
-                let userDetails = await getUserDetails()
-                setLoggedInUser(userDetails.data.name)
+                let user = await getUserDetails()
+                setLoggedInUser(user.data.name)
             } catch (e) {
-                console.log("Error while setting logged in user")
                 console.log(e)
             }
         }
-        getData()
+        userDetails()
     }, [])
     return (
         <>
@@ -30,7 +29,7 @@ const Home = () => {
             {loggedInUser && (
                 <div>
                     <Link to="/type">Type</Link>
-                    <button onClick={logOutUser}>Sign out</button>
+                    <button onClick={logoutHandler}>Sign out</button>
                 </div>
             )}
         </>
