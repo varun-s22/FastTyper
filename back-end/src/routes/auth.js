@@ -48,4 +48,17 @@ router.post("/logout", (req, res, next) => {
 router.get("/user", (req, res) => {
   res.send(req.user ?? {});
 });
+
+router.get("/authenticated", (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).send({
+      isLoggedIn: false,
+      msg: "Not Logged In",
+    });
+  }
+  res.status(200).send({
+    isLoggedIn: true,
+    msg: "logged in ",
+  });
+});
 module.exports = router;
