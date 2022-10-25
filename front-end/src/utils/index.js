@@ -35,4 +35,24 @@ const logout = async () => {
         console.log(e)
     }
 }
-export { isCorrect, getClassName, login, logout, getUserDetails }
+const isAuthenticated = async () => {
+    try {
+        let res = await axios.get(
+            `${process.env.REACT_APP_HOST}/authenticated`,
+            {
+                withCredentials: true,
+            }
+        )
+        return res.data.isLoggedIn
+    } catch (e) {
+        return e.response.data.isLoggedIn
+    }
+}
+export {
+    isCorrect,
+    getClassName,
+    login,
+    logout,
+    getUserDetails,
+    isAuthenticated,
+}
