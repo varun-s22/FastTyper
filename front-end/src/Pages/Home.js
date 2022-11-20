@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { getUserDetails, login, logout } from "../utils"
+import socketConnection from "../utils/socket"
 const Home = () => {
     const [loggedInUser, setLoggedInUser] = useState("")
+    const navigateTo = useNavigate()
     let loginHandler = async () => {
         await login()
     }
     let logoutHandler = async () => {
         await logout()
         setLoggedInUser("")
+    }
+    let joinRoom = async () => {
+        await socketConnection()
+        navigateTo("/room")
     }
     useEffect(() => {
         let userDetails = async () => {
@@ -28,7 +34,7 @@ const Home = () => {
             <p>{loggedInUser}</p>
             {loggedInUser && (
                 <div>
-                    <Link to="/type">Type</Link>
+                    <button onClick={joinRoom}>Join Room</button>
                     <button onClick={logoutHandler}>Sign out</button>
                 </div>
             )}
