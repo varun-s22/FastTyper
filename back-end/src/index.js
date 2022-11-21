@@ -5,6 +5,7 @@ const path = require("path");
 const session = require("express-session");
 const { createConn } = require("./sqlz");
 const authRoutes = require("./routes/auth");
+const roomRoutes = require("./routes/rooms");
 const cors = require("cors");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -57,6 +58,7 @@ io.use((socket, next) => {
 });
 
 app.use("/", authRoutes);
+app.use("/", roomRoutes);
 connectUsers(io);
 httpServer.listen(port, () => {
   console.log(`Connected to port ${port}`);

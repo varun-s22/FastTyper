@@ -1,4 +1,5 @@
 import axios from "axios"
+
 const isCorrect = (text, char, i) => {
     return text[i] === char
 }
@@ -48,6 +49,18 @@ const isAuthenticated = async () => {
         return e.response.data.isLoggedIn
     }
 }
+const getTextFromRoom = async (roomID) => {
+    let params = { roomID }
+    try {
+        let res = await axios.get(`${process.env.REACT_APP_HOST}/joinRoom`, {
+            params,
+            withCredentials: true,
+        })
+        return res.data.text
+    } catch (e) {
+        console.log(e)
+    }
+}
 export {
     isCorrect,
     getClassName,
@@ -55,4 +68,5 @@ export {
     logout,
     getUserDetails,
     isAuthenticated,
+    getTextFromRoom,
 }

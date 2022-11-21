@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const verify = require("../sqlz/utils/index");
+const { verify } = require("../sqlz/utils/index");
 const GoogleStategy = require("passport-google-oidc");
 
 passport.serializeUser(function (user, cb) {

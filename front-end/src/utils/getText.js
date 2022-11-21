@@ -1,14 +1,13 @@
-import axios from "axios";
+import axios from "axios"
 
-export default async (minLength = 300) => {
-  let params = { minLength };
-  let textToType = {};
-  try {
-    let res = await axios.get("https://api.quotable.io/random", { params });
-    textToType = res.data.content;
-  } catch (e) {
-    console.log("Error while fetching text");
-    console.log(e);
-  }
-  return textToType;
-};
+const getText = async () => {
+    try {
+        let res = await axios.get(`${process.env.REACT_APP_HOST}/createRoom`, {
+            withCredentials: true,
+        })
+        return res.data
+    } catch (e) {
+        console.log(e)
+    }
+}
+export default getText

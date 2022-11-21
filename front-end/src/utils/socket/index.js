@@ -1,6 +1,6 @@
 import io from "socket.io-client"
 
-const socketConnection = async () => {
+const socketConnection = async (roomId) => {
     const socket = io(`${process.env.REACT_APP_HOST}`, {
         path: "/room",
         withCredentials: true,
@@ -8,11 +8,10 @@ const socketConnection = async () => {
     })
     await socket.connect()
     socket.on("connect", () => {
-        console.log("client side connection socket")
-        console.log(socket.id)
+        console.log("connection established (client side)")
     })
     socket.emit("join", {
-        roomId: "roomID!",
+        roomID: roomId,
     })
 }
 export default socketConnection

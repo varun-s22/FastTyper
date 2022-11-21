@@ -1,6 +1,9 @@
 const { sequelize } = require("../index");
 const { QueryTypes } = require("sequelize");
 const { User } = require("../models/user");
+const { Room } = require("../models/room");
+const { v4: uuidv4 } = require("uuid");
+const axios = require("axios");
 
 const verify = async (issuer, profile, cb) => {
   let userID = profile.id;
@@ -31,4 +34,51 @@ const verify = async (issuer, profile, cb) => {
     return cb(err);
   }
 };
-module.exports = verify;
+
+const generateText = async (minLength = 300) => {
+  let params = { minLength };
+  let textToType = {};
+  try {
+    let res = await axios.get("https://api.quotable.io/random", { params });
+    textToType = res.data.content;
+  } catch (e) {
+    console.log("Error while fetching text");
+    console.log(e);
+  }
+  return textToType;
+};
+
+const createRoom = async () => {
+  // creates a new room
+  let roomID = uuidv4();
+  let textToType = await generateText();
+  let newRoom = await Room.create({
+    id: roomID,
+    text: textToType,
+  });
+  console.log(`New room created at ${newRoom.id}`);
+  return newRoom;
+};
+
+const getText = async (roomID) => {
+  try {
+    let room = await sequelize.query(
+      `SELECT text from "Rooms" WHERE "id"= :roomID`,
+      {
+        replacements: {
+          roomID,
+        },
+        type: QueryTypes.SELECT,
+      }
+    );
+    if (!room) {
+      // no such room exists
+      return {};
+    }
+    return room[0];
+  } catch (e) {
+    console.log("Error while fetching text");
+    console.log(e);
+  }
+};
+module.exports = { verify, createRoom, getText };
