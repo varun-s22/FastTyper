@@ -10,7 +10,6 @@ const Score = sequelize.define("Score", {
       key: "userID",
       deferrable: Deferrable.INITIALLY_IMMEDIATE,
     },
-    primaryKey: true,
   },
   wpm: {
     type: DataTypes.INTEGER,

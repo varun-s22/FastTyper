@@ -11,12 +11,12 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { Score } = require("./sqlz/models/score");
 const { connectUsers } = require("./socket");
+const bodyParser = require("body-parser");
 
 require("dotenv").config();
 const port = process.env.PORT;
 const httpServer = createServer(app);
 const website = process.env.WEBSITE;
-console.log(website);
 const io = new Server(httpServer, {
   path: "/room",
   cors: {
@@ -28,10 +28,19 @@ const sessionObj = session({
   secret: process.env.SESSION_SECRET,
 });
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: `${website}`,
+  })
+);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", `${website}`);
   res.setHeader("Access-Control-Allow-Credentials", true);
+  req.io = io;
   next();
 });
 
@@ -63,4 +72,3 @@ connectUsers(io);
 httpServer.listen(port, () => {
   console.log(`Connected to port ${port}`);
 });
-module.exports = { io };

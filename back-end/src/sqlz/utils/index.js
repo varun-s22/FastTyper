@@ -4,6 +4,7 @@ const { User } = require("../models/user");
 const { Room } = require("../models/room");
 const { v4: uuidv4 } = require("uuid");
 const axios = require("axios");
+const { Score } = require("../models/score");
 
 const verify = async (issuer, profile, cb) => {
   let userID = profile.id;
@@ -81,4 +82,18 @@ const getText = async (roomID) => {
     console.log(e);
   }
 };
-module.exports = { verify, createRoom, getText };
+const publishScore = async (id, wpm, date) => {
+  try {
+    let newScore = await Score.create({
+      id,
+      wpm,
+      date,
+    });
+    console.log(`Score of ${wpm} added for user ${id}, dated: ${date}`);
+    return newScore;
+  } catch (e) {
+    console.log("Error while pushing score");
+    console.log(e);
+  }
+};
+module.exports = { verify, createRoom, getText, publishScore };

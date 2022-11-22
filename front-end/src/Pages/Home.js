@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getUserDetails, login, logout } from "../utils"
+import UserContext from "../components/contexts/UserContext"
+import { login, logout } from "../utils"
 import getText from "../utils/getText"
 const Home = () => {
     const [roomId, setRoomId] = useState(null)
-    const [loggedInUser, setLoggedInUser] = useState("")
+    const { loggedInUser, setLoggedInUser, setLoggedInUserId } =
+        useContext(UserContext)
     const roomInput = useRef(null)
     const navigateTo = useNavigate()
     let loginHandler = async () => {
@@ -12,7 +14,8 @@ const Home = () => {
     }
     let logoutHandler = async () => {
         await logout()
-        setLoggedInUser("")
+        setLoggedInUser(null)
+        setLoggedInUserId(null)
     }
     let createRoom = async () => {
         let res = await getText()
@@ -23,18 +26,6 @@ const Home = () => {
         setRoomId(roomInput.current.value)
         navigateTo(`/room/${roomId}`)
     }
-    useEffect(() => {
-        let userDetails = async () => {
-            try {
-                let user = await getUserDetails()
-                setLoggedInUser(user.data.name)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        userDetails()
-    }, [])
-
     return (
         <>
             <h1> Home page</h1>

@@ -61,6 +61,39 @@ const getTextFromRoom = async (roomID) => {
         console.log(e)
     }
 }
+const publishScore = async (id, wpm) => {
+    let data = {
+        id,
+        wpm,
+        date: Date(),
+    }
+    try {
+        let res = await axios.post(
+            `${process.env.REACT_APP_HOST}/score`,
+            data,
+            {
+                withCredentials: true,
+            }
+        )
+        return res
+    } catch (e) {
+        console.log("Error while pushing score (client side)")
+        console.log(e)
+    }
+}
+const getUsersOfRoom = async (roomID) => {
+    let params = { roomID }
+    try {
+        let res = await axios.get(`${process.env.REACT_APP_HOST}/users`, {
+            params,
+            withCredentials: true,
+        })
+        return res.data.users
+    } catch (e) {
+        console.log("Error while getting users of room")
+        console.log(e)
+    }
+}
 export {
     isCorrect,
     getClassName,
@@ -69,4 +102,6 @@ export {
     getUserDetails,
     isAuthenticated,
     getTextFromRoom,
+    publishScore,
+    getUsersOfRoom,
 }
