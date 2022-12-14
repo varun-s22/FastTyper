@@ -12,7 +12,7 @@ const verify = async (issuer, profile, cb) => {
   let email = profile.emails[0].value;
   try {
     let users = await sequelize.query(
-      `SELECT * FROM "Users" WHERE "userID"= :id`,
+      `SELECT * FROM "User" WHERE "userID"= :id`,
       {
         replacements: {
           id: userID,
@@ -38,33 +38,36 @@ const verify = async (issuer, profile, cb) => {
 
 const generateText = async (minLength = 300) => {
   let params = { minLength };
-  let textToType = {};
   try {
     let res = await axios.get("https://api.quotable.io/random", { params });
-    textToType = res.data.content;
+    return res.data.content;
   } catch (e) {
-    console.log("Error while fetching text");
     console.log(e);
+    throw new Error("Error while fetching text");
   }
-  return textToType;
 };
 
 const createRoom = async () => {
   // creates a new room
   let roomID = uuidv4();
-  let textToType = await generateText();
-  let newRoom = await Room.create({
-    id: roomID,
-    text: textToType,
-  });
-  console.log(`New room created at ${newRoom.id}`);
-  return newRoom;
+  try {
+    let textToType = await generateText();
+    let newRoom = await Room.create({
+      id: roomID,
+      text: textToType,
+    });
+    console.log(`New room created at ${newRoom.id}`);
+    return newRoom;
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error while creating room");
+  }
 };
 
 const getText = async (roomID) => {
   try {
     let room = await sequelize.query(
-      `SELECT text from "Rooms" WHERE "id"= :roomID`,
+      `SELECT text FROM "Room" WHERE "id"= :roomID`,
       {
         replacements: {
           roomID,
@@ -78,8 +81,8 @@ const getText = async (roomID) => {
     }
     return room[0];
   } catch (e) {
-    console.log("Error while fetching text");
     console.log(e);
+    throw new Error("Error while fetching text");
   }
 };
 const publishScore = async (id, wpm, date) => {
@@ -92,8 +95,31 @@ const publishScore = async (id, wpm, date) => {
     console.log(`Score of ${wpm} added for user ${id}, dated: ${date}`);
     return newScore;
   } catch (e) {
-    console.log("Error while pushing score");
     console.log(e);
+    throw new Error("Error while pushing score");
   }
 };
-module.exports = { verify, createRoom, getText, publishScore };
+const getScoresOfUsers = async (id) => {
+  try {
+    let scores = await sequelize.query(
+      `SELECT wpm,date FROM "Score" WHERE "id"=:id`,
+      {
+        replacements: {
+          id,
+        },
+        type: QueryTypes.SELECT,
+      }
+    );
+    return scores;
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error while getting scores");
+  }
+};
+module.exports = {
+  verify,
+  createRoom,
+  getText,
+  publishScore,
+  getScoresOfUsers,
+};

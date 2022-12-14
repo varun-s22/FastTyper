@@ -18,14 +18,17 @@ const connectUsers = (io) => {
   });
 };
 const getUsersOfRoom = async (io, roomID) => {
+  if (roomID === undefined || roomID === null) {
+    throw new Error("Room Id not defined");
+  }
   try {
     let connectedSockets = await io.in(roomID).fetchSockets();
     return connectedSockets.map((socketObj) => {
       return { data: socketObj.data };
     });
   } catch (e) {
-    console.log("Error while fetching users of room");
     console.log(e);
+    throw new Error("Error while fetching users of room");
   }
 };
 module.exports = { connectUsers, getUsersOfRoom };
