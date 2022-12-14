@@ -94,6 +94,19 @@ const getUsersOfRoom = async (roomID) => {
         console.log(e)
     }
 }
+const getScoresOfUsers = async (userID) => {
+    let params = { id: userID }
+    try {
+        let res = await axios.get(`${process.env.REACT_APP_HOST}/scores`, {
+            params,
+            withCredentials: true,
+        })
+        return res.data.scores
+    } catch (e) {
+        console.log("Error while getting scores of user")
+        console.log(e)
+    }
+}
 export {
     isCorrect,
     getClassName,
@@ -104,4 +117,5 @@ export {
     getTextFromRoom,
     publishScore,
     getUsersOfRoom,
+    getScoresOfUsers,
 }

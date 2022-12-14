@@ -4,8 +4,8 @@ import UserContext from "../components/contexts/UserContext"
 import { login, logout } from "../utils"
 import getText from "../utils/getText"
 const Home = () => {
-    const [roomId, setRoomId] = useState(null)
-    const { loggedInUser, setLoggedInUser, setLoggedInUserId } =
+    const [setRoomId] = useState(null)
+    const { loggedInUser, setLoggedInUser, setLoggedInUserId, loggedInUserId } =
         useContext(UserContext)
     const roomInput = useRef(null)
     const navigateTo = useNavigate()
@@ -21,16 +21,20 @@ const Home = () => {
         let res = await getText()
         navigateTo(`/room/${res.id}`)
     }
+    let profileSection = async () => {
+        navigateTo(`/profile`)
+    }
     let joinRoom = async (e) => {
         e.preventDefault()
         setRoomId(roomInput.current.value)
-        navigateTo(`/room/${roomId}`)
+        navigateTo(`/room/${roomInput.current.value}`)
     }
     return (
         <>
             <h1> Home page</h1>
             {!loggedInUser && <button onClick={loginHandler}>Sign In</button>}
             <p>{loggedInUser}</p>
+            {loggedInUser && <button onClick={profileSection}>Profile</button>}
             {loggedInUser && (
                 <div>
                     <button onClick={createRoom}>Create Room</button>
