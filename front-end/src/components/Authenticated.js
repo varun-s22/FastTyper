@@ -6,7 +6,6 @@ const Authenticated = (props) => {
     const checkAuthenticated = async () => {
         try {
             let res = await isAuthenticated()
-            console.log(res)
             return res
         } catch (e) {
             console.log(e)

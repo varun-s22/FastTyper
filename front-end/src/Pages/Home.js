@@ -1,40 +1,29 @@
 import { useContext, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import UserContext from "../components/contexts/UserContext"
-import { login, logout } from "../utils"
+import NavBar from "../components/NavBar"
 import getText from "../utils/getText"
+import "./Home.css"
 const Home = () => {
     const [setRoomId] = useState(null)
-    const { loggedInUser, setLoggedInUser, setLoggedInUserId, loggedInUserId } =
-        useContext(UserContext)
+    const { loggedInUser } = useContext(UserContext)
     const roomInput = useRef(null)
     const navigateTo = useNavigate()
-    let loginHandler = async () => {
-        await login()
-    }
-    let logoutHandler = async () => {
-        await logout()
-        setLoggedInUser(null)
-        setLoggedInUserId(null)
-    }
+
     let createRoom = async () => {
         let res = await getText()
         navigateTo(`/room/${res.id}`)
     }
-    let profileSection = async () => {
-        navigateTo(`/profile`)
-    }
+
     let joinRoom = async (e) => {
         e.preventDefault()
         setRoomId(roomInput.current.value)
         navigateTo(`/room/${roomInput.current.value}`)
     }
     return (
-        <>
-            <h1> Home page</h1>
-            {!loggedInUser && <button onClick={loginHandler}>Sign In</button>}
-            <p>{loggedInUser}</p>
-            {loggedInUser && <button onClick={profileSection}>Profile</button>}
+        <div className="Home">
+            <NavBar />
+            <h1 className="heading">FastTyper</h1>
             {loggedInUser && (
                 <div>
                     <button onClick={createRoom}>Create Room</button>
@@ -44,10 +33,9 @@ const Home = () => {
                             <button type="submit">Join Room</button>
                         </form>
                     </div>
-                    <button onClick={logoutHandler}>Sign out</button>
                 </div>
             )}
-        </>
+        </div>
     )
 }
 export default Home

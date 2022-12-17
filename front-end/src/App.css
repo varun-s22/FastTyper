@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Montserrat:wght@500&display=swap');
+:root{
+    --green:linear-gradient(#07eb44,#32a852);
+    --background:linear-gradient(#161716,#3f423e);
+    --yellow:#dcfc49;
+    --yellow-gradient:linear-gradient(#dbfa8c,#b9f71b);
+    background: var(--background);
+  }

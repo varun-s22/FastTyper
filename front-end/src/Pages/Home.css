@@ -1,0 +1,31 @@
+.heading{
+    font-size: 1000%;
+    font-weight: 800;
+    -webkit-text-stroke: 1px #32a852;
+    color: transparent;
+    max-width: max-content;
+    border-right: 4px solid green;
+    background:var(--green);
+    background-clip: text;
+    animation: fillText 8s forwards,blink 900ms 100;
+    font-family: 'Lora', serif;
+}
+@keyframes fillText {
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes blink{
+    50%{
+        border-color: transparent;
+    }
+}
+.Home{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
