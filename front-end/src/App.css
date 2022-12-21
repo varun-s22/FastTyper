@@ -4,5 +4,10 @@
     --background:linear-gradient(#161716,#3f423e);
     --yellow:#dcfc49;
     --yellow-gradient:linear-gradient(#dbfa8c,#b9f71b);
+    --info-gradient:linear-gradient(#2dfc80,#0ff5b0);
+    --google-btn:#E9E9E9;
     background: var(--background);
   }
+html{
+    scroll-behavior: smooth;
+}
