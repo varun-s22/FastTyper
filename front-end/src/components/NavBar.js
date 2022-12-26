@@ -25,16 +25,22 @@ const NavBar = (props) => {
             <button onClick={goToHome} className="actionBtn">
                 FastTyper
             </button>
-            <button onClick={props.scrollDown} className="actionBtn">
-                About
-            </button>
-            {loggedInUser && (
+
+            {loggedInUser ? (
                 <span>
-                    <button onClick={profileSection}>{loggedInUser}</button>
+                    <button onClick={profileSection} className="actionBtn">
+                        {loggedInUser}
+                    </button>
                     <button onClick={logoutHandler} className="actionBtn">
                         Sign out
                     </button>
                 </span>
+            ) : (
+                <>
+                    <button onClick={props.scrollDown} className="actionBtn">
+                        About
+                    </button>
+                </>
             )}
         </div>
     )

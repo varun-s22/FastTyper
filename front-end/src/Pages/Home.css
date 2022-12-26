@@ -35,7 +35,7 @@
     grid-template-rows: 0.1fr 0.3fr 0.1fr 0.3fr;
 }
 .googleBtn{
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-family);
     background: transparent;
     border: none;
     display: flex;
@@ -86,7 +86,7 @@
     padding: 1.5vw;
 }
 .info{
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-family);
     display: flex;
     margin-top: 32vh;
     padding: 5vh 5vh 10vh 5vh;
@@ -106,4 +106,63 @@
     background: var(--yellow-gradient);
     background-clip: text;
     -webkit-background-clip: text;
+}
+.homeButtons{
+    background-image: linear-gradient(to right, #000000 0%, #0f9b0f  51%, #000000  100%);
+    font-family: var(--font-family);
+    color: var(--google-btn);
+    font-weight: 900;
+    font-size: 2vw;
+    padding: 4vw;
+    border-radius: 15px 150px 30px;
+    border: none;
+    box-shadow: -0.3vw 0.2vw #6b8f68;
+    transition: 0.5s;
+    background-size: 200% auto;
+    cursor: pointer;
+    width: 24vw;
+} 
+.homeButtons:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+.btnGrp{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 5vw;
+    justify-items: center;
+    padding: 10vw 20vw 10vw 20vw;
+}
+.submitBtn{
+    background: var(--info-gradient);
+    font-family: var(--font-family);
+    font-size: 1.5vw;
+    padding: 1vh 2.5vw 1vh 2.5vw;
+    cursor: pointer;
+    border: none;
+    border-radius: 2vw;
+}
+.submitBtn:hover{
+    background: var(--btn-gradient);
+    color: var(--google-btn);
+}
+.inputDiv{
+    display: flex;
+    justify-content: center;
+    padding: 2vw;
+}
+.roomInputField{
+    min-height: 4vh;
+    min-width: 37vw; 
+    border-radius: 2vw;
+    font-family: var(--font-family);
+    font-size: 1.5vw;
+    padding: 0.5vw 1vw;
+}
+.contentHeading{
+    padding: 1vw;
+    font-size: 1.7vw;
+    display: flex;
+    justify-content: center;
 }
