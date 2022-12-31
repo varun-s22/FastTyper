@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-const { isAuthenticated } = require("../utils")
+import { isAuthenticated } from "../utils"
+import Error from "./Error"
 
 const Authenticated = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -22,9 +23,12 @@ const Authenticated = (props) => {
         return props.children
     } else {
         return (
-            <>
-                <h1>Error</h1>
-            </>
+            <Error
+                heading="Not Signed In"
+                description="You need to sign in to access these pages"
+                suggestion="Sign In by clicking"
+                navigateTo="/"
+            />
         )
     }
 }

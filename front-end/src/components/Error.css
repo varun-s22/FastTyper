@@ -1,0 +1,28 @@
+.Error{
+    min-height: 100vh;
+    min-width: 100vw;
+    font-family: var(--font-family);
+    color: var(--google-btn);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+    line-height: 5vw;
+}
+.redirect{
+    background: var(--btn-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.redirect:hover{
+    background: var(--info-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.errorHeading{
+    color: var(--wrong-color);
+    font-size: 10vw;
+}

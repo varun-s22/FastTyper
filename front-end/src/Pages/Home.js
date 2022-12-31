@@ -29,7 +29,11 @@ const Home = () => {
         navigateTo(`/room/${roomInput.current.value}`)
     }
     let scrollDown = () => {
-        let arrow = document.querySelector(".info")
+        let arrow = document.querySelector(".page2")
+        arrow.scrollIntoView()
+    }
+    let scrollDownMore = () => {
+        let arrow = document.querySelector(".page3")
         arrow.scrollIntoView()
     }
     let showDialogBox = () => {
@@ -37,91 +41,118 @@ const Home = () => {
     }
     return (
         <div className="Home">
-            <NavBar scrollDown={scrollDown} />
-
             {loggedInUser ? (
-                <div className="btnGrp">
-                    <button onClick={createRoom} className="homeButtons">
-                        Create Multiplayer
-                    </button>
-                    <button className="homeButtons">Play</button>
-                    <button className="homeButtons" onClick={showDialogBox}>
-                        Join Multiplayer
-                    </button>
-                    <button className="homeButtons">Leaderboard</button>
-                    {openDialogBox && (
-                        <DialogBox
-                            heading="Join Room"
-                            content={
-                                <div>
-                                    <span className="contentHeading">
-                                        Enter room id to join
-                                    </span>
-                                    <form
-                                        onSubmit={joinRoom}
-                                        className="inputDiv"
-                                    >
-                                        <input
-                                            type="text"
-                                            ref={roomInput}
-                                            className="roomInputField"
-                                            placeholder="Enter room id here"
-                                        />
-                                        <button
-                                            type="submit"
-                                            className="submitBtn"
+                <div>
+                    <NavBar scrollDown={scrollDown} />
+                    <div className="btnGrp">
+                        <button onClick={createRoom} className="homeButtons">
+                            Create Multiplayer
+                        </button>
+                        <button className="homeButtons">Play</button>
+                        <button className="homeButtons" onClick={showDialogBox}>
+                            Join Multiplayer
+                        </button>
+                        <button className="homeButtons">Leaderboard</button>
+                        {openDialogBox && (
+                            <DialogBox
+                                heading="Join Room"
+                                content={
+                                    <div>
+                                        <span className="contentHeading">
+                                            Enter room id to join
+                                        </span>
+                                        <form
+                                            onSubmit={joinRoom}
+                                            className="inputDiv"
                                         >
-                                            Join
-                                        </button>
-                                    </form>
-                                </div>
-                            }
-                            hideDialogBox={() => setOpenDialogBox(false)}
-                        />
-                    )}
+                                            <input
+                                                type="text"
+                                                ref={roomInput}
+                                                className="roomInputField"
+                                                placeholder="Enter room id here"
+                                            />
+                                            <button
+                                                type="submit"
+                                                className="submitBtn"
+                                            >
+                                                Join
+                                            </button>
+                                        </form>
+                                    </div>
+                                }
+                                hideDialogBox={() => setOpenDialogBox(false)}
+                            />
+                        )}
+                    </div>
                 </div>
             ) : (
-                <>
-                    <div className="headingDiv">
-                        <h1 className="heading">FastTyper</h1>
-                    </div>
-                    <div className="arrow" onClick={scrollDown}>
-                        <img
-                            src="images/down-chevron.png"
-                            className="down-arrows"
-                            alt="down pointing chevrons"
-                        />
-                    </div>
-                    <div className="info">
-                        <div className="svgArt">
+                <div>
+                    <div className="page1">
+                        <NavBar scrollDown={scrollDown} />
+
+                        <div className="headingDiv">
+                            <h1 className="heading">FastTyper</h1>
+                        </div>
+                        <div className="arrow" onClick={scrollDown}>
                             <img
-                                src="images/info-art.svg"
-                                className="art"
-                                alt="info art"
+                                src="images/down-chevron.png"
+                                className="down-arrows"
+                                alt="down pointing chevrons"
                             />
                         </div>
-                        <div className="text">
-                            You think you can type fast?.. Compete with others
-                            live, to get accurate results.
-                            <h3>Want to try FastTyper?</h3>
-                            {!loggedInUser && (
-                                <button
-                                    onClick={loginHandler}
-                                    className="googleBtn"
-                                >
-                                    <img
-                                        src="images/google-logo.png"
-                                        className="googleLogo"
-                                        alt="google icon"
-                                    />
-                                    <span className="btnText">
-                                        Continue With Google
-                                    </span>
-                                </button>
-                            )}
+                    </div>
+                    <div className="page2">
+                        <div className="page2-inner">
+                            <div className="room-info">
+                                Join and Create rooms, to compete with other
+                                players live.
+                            </div>
+                            <img
+                                src="images/room.png"
+                                className="room-image"
+                                alt="creating/joining rooms"
+                            />
+                        </div>
+                        <div className="arrow" onClick={scrollDownMore}>
+                            <img
+                                src="images/down-chevron.png"
+                                className="down-arrows"
+                                alt="down pointing chevrons"
+                            />
                         </div>
                     </div>
-                </>
+                    <div className="page3">
+                        <div className="info">
+                            <div className="svgArt">
+                                <img
+                                    src="images/info-art.svg"
+                                    className="art"
+                                    alt="info art"
+                                />
+                            </div>
+                            <div className="text">
+                                You think you can type fast?.. Compete with
+                                others live, to get accurate results.
+                                <h3>Want to try FastTyper?</h3>
+                                {!loggedInUser && (
+                                    <button
+                                        onClick={loginHandler}
+                                        className="googleBtn"
+                                    >
+                                        <img
+                                            src="images/google-logo.png"
+                                            className="googleLogo"
+                                            alt="google icon"
+                                        />
+                                        <span className="btnText">
+                                            Continue With Google
+                                        </span>
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     )
