@@ -4,12 +4,14 @@
     font-size: 1.5vw;
     color: var(--google-btn);
     box-shadow: 0vw 0vw 2vw beige;
-    border: 0.4vw solid beige;
-    width: 50vw;
-    height: 55vh;
+    border: 0.2vw solid beige;
+    max-width: 50vw;
+    max-height: 55vh;
 }
 .DialogBox{
     position: fixed;
+    top:25vh;
+    left: 25vw;
 }
 .overlay{
     position: fixed;

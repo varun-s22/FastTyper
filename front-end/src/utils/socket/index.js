@@ -9,10 +9,11 @@ socket.connect()
 socket.on("connect", () => {
     console.log("connection established (client side)")
 })
-const socketJoinRoom = async (roomId, userID) => {
+const socketJoinRoom = async (roomId, userID, userName) => {
     socket.emit("join", {
         roomID: roomId,
         userID,
+        userName,
     })
 }
 export { socket, socketJoinRoom }

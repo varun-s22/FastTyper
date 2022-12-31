@@ -3,6 +3,7 @@ const getScore = (
     setIsTyping,
     startTime,
     setStartTime,
+    correctChar,
     text,
     currentKeyPressed,
     startTimer,
@@ -17,7 +18,7 @@ const getScore = (
         setIsTyping(false)
         stopTimer()
         let duration = (Date.now() - startTime) / (60 * 1000)
-        let words = text.split(" ")
+        let words = text.slice(0, correctChar).split(" ")
         let ans = Math.floor(words.length / duration)
         return ans
     }

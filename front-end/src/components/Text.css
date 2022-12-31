@@ -1,25 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
 
 .Text{
-    font-family: 'Anonymous Pro', monospace;
-    font-size: 1.8em;
-    line-height: 1.3em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-family: var(--typing-font);
+    font-size: 1.8vw;
+    line-height: 5vh;
     position: relative;
     color: gray;
-    outline: none;
-    width: 40vw;
-    text-align: justify;
+    padding:2vw 5vw;
 }
 .correct{
-    color: green;
-    background-color: white;
+    color: var(--correct-color);
+    background: var(--typing-background);
 }
 .wrong{
-    color: red;
-    background-color: white;
+    color: var(--wrong-color);
+    background: var(--typing-background);
 }
 .hidden{
     position: relative;
@@ -27,7 +22,14 @@
     left:-1000%;
 }
 .enteredText{
-    inset: 0 0;
     position: absolute;
-    color: black;
+    top: 0;
+    left: 0;
+    padding: 2vw 5vw;
+}
+.score{
+    background: var(--info-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }

@@ -1,4 +1,6 @@
 import Authenticated from "../components/Authenticated"
+import NavBar from "../components/NavBar"
+import "./Profile.css"
 
 const { useContext, useState, useEffect } = require("react")
 const { default: UserContext } = require("../components/contexts/UserContext")
@@ -17,15 +19,20 @@ const Profile = () => {
 
     return (
         <Authenticated>
-            <h1>{loggedInUser}</h1>
-            {scoresOfUser &&
-                scoresOfUser.map((scoreObj) => (
-                    <ul key={Math.random()}>
-                        <li>
-                            {scoreObj.wpm} - {scoreObj.date}
-                        </li>
-                    </ul>
-                ))}
+            <div className="Profile">
+                <NavBar />
+                <h1 className="user-name">{loggedInUser}</h1>
+                <div className="scores">
+                    {scoresOfUser &&
+                        scoresOfUser.map((scoreObj) => (
+                            <ul key={Math.random()}>
+                                <li>
+                                    {scoreObj.wpm} - {scoreObj.date}
+                                </li>
+                            </ul>
+                        ))}
+                </div>
+            </div>
         </Authenticated>
     )
 }

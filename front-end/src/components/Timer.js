@@ -1,3 +1,4 @@
+import "./Timer.css"
 const Timer = (props) => {
     const formatTime = (currTime) => {
         const getSeconds = `0${currTime % 60}`.slice(-2)
@@ -8,8 +9,8 @@ const Timer = (props) => {
     }
 
     return (
-        <div id="Timer">
-            <h1>{formatTime(props.time)}</h1>
+        <div className="Timer">
+            <div className="timer">{formatTime(props.time)}</div>
         </div>
     )
 }

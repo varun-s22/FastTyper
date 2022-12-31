@@ -6,7 +6,7 @@ import { socket } from "../utils/socket"
 import "./Text.css"
 
 const Text = (props) => {
-    const [enteredText, setEnteredText] = useState(null)
+    const [enteredText, setEnteredText] = useState()
     const [correctChar, setCorrectChar] = useState(0)
     const [isTyping, setIsTyping] = useState(false)
     const [startTime, setStartTime] = useState(0)
@@ -36,6 +36,7 @@ const Text = (props) => {
                     setIsTyping,
                     startTime,
                     setStartTime,
+                    correctChar,
                     props.text,
                     currentKeyPressed,
                     props.startTimer,
@@ -55,15 +56,15 @@ const Text = (props) => {
     ))
     return (
         <div className="Text">
-            <>{props.text}~</>
+            <div className="text-to-type">{props.text}~</div>
             <input
                 type="text"
                 ref={focusRef}
-                className="hidden"
                 onChange={keyEventHandler}
+                className="hidden"
             />
             <div className="enteredText">{spans}</div>
-            {userWPM && <div>{userWPM} wpm</div>}
+            {userWPM && <div className="score">{userWPM} wpm</div>}
         </div>
     )
 }

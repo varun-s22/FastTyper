@@ -1,0 +1,20 @@
+.Participants{
+    margin: 1vw 2vw;
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #222224;
+    border: 0.3vw solid #24c9b1;
+    box-shadow: 0.3vw 0.3vw 1vw var(--yellow);
+}
+.participant-heading{
+    font-family: var(--font-family);
+    font-size: 3vw;
+    color: var(--google-btn);
+}
+.participants-list{
+    font-family: var(--font-family);
+    font-size: 2vw;
+    color: var(--yellow);
+}

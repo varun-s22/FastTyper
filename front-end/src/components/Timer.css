@@ -1,0 +1,10 @@
+.timer{
+    font-family: var(--font-family);
+    background: var(--info-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: flex;
+    justify-content: center;
+    font-size: 3.5vw;
+}

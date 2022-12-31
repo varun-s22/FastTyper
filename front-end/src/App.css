@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Montserrat:wght@500&family=Roboto+Mono&display=swap');
 :root{
     --green:linear-gradient(#07eb44,#32a852);
     --green-gradient:linear-gradient(#1D976C,#32a852,#93F9B9);
@@ -10,6 +10,10 @@
     --btn-gradient-hover:linear-gradient(#affae3,#8af2d3,#61edc3);
     --google-btn:#E9E9E9;
     --font-family: 'Montserrat', sans-serif;
+    --typing-font:'Roboto Mono', monospace;
+    --correct-color:whitesmoke;
+    --wrong-color:red;
+    --typing-background:#33322f;
     background: var(--background);
   }
 html{

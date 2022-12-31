@@ -1,0 +1,32 @@
+.Room{
+    min-width: 100vw;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 0.2fr 0.2fr;
+    background: var(--typing-background);
+    grid-template-areas: 
+    "heading participants"
+    "typingArea participants"
+    "typingArea participants";
+}
+.room-name{
+    font-family: var(--font-family);
+    font-size: 8vh;
+    color: var(--google-btn);
+    display: flex;
+    justify-content: center;
+    grid-area: heading;
+}
+.write-area{
+    display: flex;
+    flex-direction: column;
+    margin-top: 4vw;
+    justify-content: center;
+    grid-area: typingArea;
+}
+.Timer{
+    grid-area: timer;
+}
+.Participants{
+    grid-area: participants;
+}

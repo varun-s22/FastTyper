@@ -3,11 +3,15 @@ const connectUsers = (io) => {
     socket.on("join", async (event) => {
       socket.join(event.roomID);
       socket.data.userID = event.userID;
+      socket.data.userName = event.userName;
       // fetches all users in room
-      let sockets = await io.in(event.roomID).fetchSockets();
+      let socketsInRoom = await io.in(event.roomID).fetchSockets();
       console.log(
-        `${event.userID} joined the room ${event.roomID}. Number of users in room: ${sockets.length}`
+        `${event.userID} joined the room ${event.roomID}. Number of users in room: ${socketsInRoom.length}`
       );
+      io.to(event.roomID).emit("newUserJoined", {
+        users: socketsInRoom.map((obj) => obj.data),
+      });
     });
     socket.on("score", (res) => {
       socket.data.score = res.score;
