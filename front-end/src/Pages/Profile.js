@@ -1,13 +1,14 @@
 import Authenticated from "../components/Authenticated"
+import { useContext, useEffect, useState } from "react"
 import NavBar from "../components/NavBar"
+import { Chart } from "react-google-charts"
+import UserContext from "../components/contexts/UserContext"
+import { getScoresOfUsers, optionsForChart } from "../utils"
 import "./Profile.css"
 
-const { useContext, useState, useEffect } = require("react")
-const { default: UserContext } = require("../components/contexts/UserContext")
-const { getScoresOfUsers } = require("../utils")
-
 const Profile = () => {
-    const { loggedInUser, loggedInUserId } = useContext(UserContext)
+    const { loggedInUserId, loggedInUser, loggedInUserEmail, userCreatedAt } =
+        useContext(UserContext)
     const [scoresOfUser, setScoresOfUser] = useState([])
     useEffect(() => {
         let getScores = async () => {
@@ -20,18 +21,54 @@ const Profile = () => {
     return (
         <Authenticated>
             <div className="Profile">
-                <NavBar />
-                <h1 className="user-name">{loggedInUser}</h1>
-                <div className="scores">
-                    {scoresOfUser &&
-                        scoresOfUser.map((scoreObj) => (
-                            <ul key={Math.random()}>
-                                <li>
-                                    {scoreObj.wpm} - {scoreObj.date}
-                                </li>
-                            </ul>
-                        ))}
+                <NavBar imgPath="../images/profile-picture.png" />
+                <div className="LeftPane">
+                    <div className="profile-info">
+                        <div className="user-img">
+                            <img
+                                src="../images/profile-picture.png"
+                                alt="profile avatar"
+                                className="profile-avatar"
+                            />
+                        </div>
+                        <div className="user-name">{loggedInUser}</div>
+                        <div className="user-email">{loggedInUserEmail}</div>
+                        <div className="user-joined">
+                            User Joined:{" "}
+                            {new Date(userCreatedAt).toDateString()}
+                        </div>
+                    </div>
+                    <div className="stats">
+                        <h2>Stats</h2>
+                        <div>
+                            Max Score :{" "}
+                            {Math.max(
+                                ...scoresOfUser.map((scoreObj) => scoreObj.wpm)
+                            )}{" "}
+                            wpm
+                        </div>
+                        <div>
+                            Min Score :{" "}
+                            {Math.min(
+                                ...scoresOfUser.map((scoreObj) => scoreObj.wpm)
+                            )}{" "}
+                            wpm
+                        </div>
+                    </div>
                 </div>
+                <Chart
+                    className="chart"
+                    chartType="LineChart"
+                    width="50vw"
+                    height="55vh"
+                    data={[
+                        ["Date", "WPM", { role: "style" }],
+                        ...scoresOfUser.map((obj) => {
+                            return [obj.newDate, obj.wpm, "color:#fccc62"]
+                        }),
+                    ]}
+                    options={optionsForChart}
+                />
             </div>
         </Authenticated>
     )

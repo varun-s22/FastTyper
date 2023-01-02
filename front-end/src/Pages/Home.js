@@ -20,6 +20,7 @@ const Home = () => {
 
     let createRoom = async () => {
         let res = await getText()
+        setRoomId(res.id)
         navigateTo(`/room/${res.id}`)
     }
 
@@ -28,11 +29,11 @@ const Home = () => {
         setRoomId(roomInput.current.value)
         navigateTo(`/room/${roomInput.current.value}`)
     }
-    let scrollDown = () => {
+    let aboutSection = () => {
         let arrow = document.querySelector(".page2")
         arrow.scrollIntoView()
     }
-    let scrollDownMore = () => {
+    let loginSection = () => {
         let arrow = document.querySelector(".page3")
         arrow.scrollIntoView()
     }
@@ -42,8 +43,11 @@ const Home = () => {
     return (
         <div className="Home">
             {loggedInUser ? (
-                <div>
-                    <NavBar scrollDown={scrollDown} />
+                <div className="page1">
+                    <NavBar
+                        aboutSection={aboutSection}
+                        loginSection={loginSection}
+                    />
                     <div className="btnGrp">
                         <button onClick={createRoom} className="homeButtons">
                             Create Multiplayer
@@ -88,12 +92,15 @@ const Home = () => {
             ) : (
                 <div>
                     <div className="page1">
-                        <NavBar scrollDown={scrollDown} />
+                        <NavBar
+                            aboutSection={aboutSection}
+                            loginSection={loginSection}
+                        />
 
                         <div className="headingDiv">
                             <h1 className="heading">FastTyper</h1>
                         </div>
-                        <div className="arrow" onClick={scrollDown}>
+                        <div className="arrow" onClick={aboutSection}>
                             <img
                                 src="images/down-chevron.png"
                                 className="down-arrows"
@@ -113,7 +120,7 @@ const Home = () => {
                                 alt="creating/joining rooms"
                             />
                         </div>
-                        <div className="arrow" onClick={scrollDownMore}>
+                        <div className="arrow" onClick={loginSection}>
                             <img
                                 src="images/down-chevron.png"
                                 className="down-arrows"

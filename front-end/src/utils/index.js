@@ -101,11 +101,55 @@ const getScoresOfUsers = async (userID) => {
             params,
             withCredentials: true,
         })
-        return res.data.scores
+        const newScores = res.data.scores.map((obj) => {
+            return {
+                ...obj,
+                newDate: new Date(obj.date).toDateString().slice(4),
+            }
+        })
+        console.log(newScores)
+        return newScores
     } catch (e) {
         console.log("Error while getting scores of user")
         console.log(e)
     }
+}
+const optionsForChart = {
+    title: `User performance`,
+    titleTextStyle: {
+        color: "#f9f4da",
+        fontSize: "20",
+    },
+    legend: {
+        position: "bottom",
+        textStyle: { color: "#f9f4da" },
+    },
+    curveType: "function",
+    hAxis: {
+        title: "Date",
+        textStyle: { color: "#f9f4da" },
+        titleTextStyle: {
+            color: "#f9f4da",
+            fontSize: "17",
+        },
+    },
+    vAxis: {
+        title: "WPM",
+        minValue: 0,
+        maxValue: 120,
+        textStyle: { color: "#f9f4da" },
+        titleTextStyle: {
+            color: "#f9f4da",
+            fontSize: "17",
+        },
+    },
+    animation: {
+        startup: true,
+        easing: "linear",
+        duration: 1500,
+    },
+    backgroundColor: "transparent",
+    colors: ["#fccc62", "#f9f4da"],
 }
 export {
     isCorrect,
@@ -118,4 +162,5 @@ export {
     publishScore,
     getUsersOfRoom,
     getScoresOfUsers,
+    optionsForChart,
 }

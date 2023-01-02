@@ -1,20 +1,30 @@
 .NavBar{
-    height: auto;
+    max-height: 1vh;
     padding: 1%;
+    display: flex;
+    justify-content: space-between;
 }
 .actionBtn{
-    font-family: 'Montserrat', sans-serif;
-    -webkit-text-fill-color: transparent;
-    border: none;
+    font-family: var(--typing-font);
     font-weight: 500;
-    font-size: 200%;
-    background: var(--google-btn);
-    position: relative;
-    background-clip: text;
+    font-size: 2vw;
+    border: none;
     padding: 0.5vw 1vw 0.5vw 1vw;
+    background: transparent;
+    text-decoration: none;
+    color: var(--google-btn);
+}
+.profile-picture{
+    max-width: 3vw;
+    max-height: 10vh;
+    border: 0.25vw solid var(--yellow);
+    box-shadow: 0vw 0vw 1vw var(--yellow);
+    border-radius: 2vw;
 }
 .actionBtn:hover {
     cursor: pointer;
-    background: var(--yellow-gradient);
-    background-clip: text;
+    color: var(--yellow);
+}
+.rightDiv{
+    display: flex;
 }

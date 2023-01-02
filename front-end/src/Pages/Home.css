@@ -30,7 +30,6 @@
 }
 .Home{
     display: grid;
-    /* grid-template-rows: 0.1fr 0.3fr 0.1fr 0.3fr; */
 }
 .googleBtn{
     font-family: var(--font-family);
@@ -69,12 +68,15 @@
     border: 3px solid var(--yellow);
     border-radius: 8vw;
     padding: 1.5vw;
-    background: var(--yellow-gradient);
+    background: var(--yellow);
 }
 .arrow{
     display: flex;
     justify-content: center;
     cursor: pointer;
+}
+.down-arrows:hover{
+    background: var(--yellow-hover);
 }
 .art{
     min-width: 50vw;

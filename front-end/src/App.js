@@ -6,13 +6,17 @@ import { useState, useEffect } from "react"
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState(null)
+    const [loggedInUserEmail, setLoggedInUserEmail] = useState(null)
     const [loggedInUserId, setLoggedInUserId] = useState(null)
+    const [userCreatedAt, setUserCreatedAt] = useState(null)
     useEffect(() => {
         let userDetails = async () => {
             try {
                 let user = await getUserDetails()
                 setLoggedInUser(user.data.name)
                 setLoggedInUserId(user.data.id)
+                setLoggedInUserEmail(user.data.username)
+                setUserCreatedAt(user.data.createdAt)
             } catch (e) {
                 console.log(e)
             }
@@ -26,6 +30,10 @@ function App() {
                 loggedInUserId,
                 setLoggedInUser,
                 setLoggedInUserId,
+                loggedInUserEmail,
+                setLoggedInUserEmail,
+                userCreatedAt,
+                setUserCreatedAt,
             }}
         >
             <Router />

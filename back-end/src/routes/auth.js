@@ -6,7 +6,12 @@ const GoogleStategy = require("passport-google-oidc");
 
 passport.serializeUser(function (user, cb) {
   process.nextTick(function () {
-    return cb(null, { id: user.userID, username: user.email, name: user.name });
+    return cb(null, {
+      id: user.userID,
+      username: user.email,
+      name: user.name,
+      createdAt: user.createdAt,
+    });
   });
 });
 
