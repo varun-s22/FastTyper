@@ -12,8 +12,8 @@
     --google-btn:#f9f4da;
     --font-family: 'Montserrat', sans-serif;
     --typing-font:'Roboto Mono', monospace;
-    --correct-color:whitesmoke;
-    --wrong-color:red;
+    --correct-color:#f9f4da;
+    --wrong-color:#e84848;
     --typing-background:#0f0d0e;
     --profile-section:#292b29;
     background: var(--background);

@@ -29,7 +29,8 @@ Since we are using React for front-end, and Express, PostGreSQL, WebSockets in t
 
 <br>
 
-- For Back End, go to `/back-end` directory, and run `npm install` to download all the dependencies locally, on your machine.
+- Install <a href="https://www.postgresql.org/download/">PostgreSQL</a>
+- Go to `/back-end` directory, and run `npm install` to download all the dependencies locally, on your machine.
 
 - Create a `.env` file in the same directory, it should look something like this:
 
