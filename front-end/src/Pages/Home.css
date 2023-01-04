@@ -33,25 +33,20 @@
 }
 .googleBtn{
     font-family: var(--font-family);
-    background: transparent;
+    background: black;
+    color: var(--google-btn);
+    font-size: 2.5vh;
+    padding: 1vw;
     border: none;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     max-height: fit-content;
     max-width: fit-content;
     cursor: pointer;
     align-items: center;
     padding: 0.2vw 0.7vw 0.2vw 0.7vw;
 }
-.btnText{
-    background: black;
-    color: var(--google-btn);
-    font-weight: 500;
-    font-size: 2.5vh;
-    padding: 1vw;
-    border-radius: 0.3vw;
-}
-.btnText:hover{
+.googleBtn:hover{
     color: var(--yellow);
 }
 .googleLogo{

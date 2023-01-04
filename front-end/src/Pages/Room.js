@@ -9,7 +9,6 @@ import UserContext from "../components/contexts/UserContext"
 import DialogBox from "../components/DialogBox"
 import Participants from "../components/Participants"
 import "./Room.css"
-import NavBar from "../components/NavBar"
 
 const Room = () => {
     const { id } = useParams()

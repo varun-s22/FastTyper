@@ -151,9 +151,7 @@ const Home = () => {
                                             className="googleLogo"
                                             alt="google icon"
                                         />
-                                        <span className="btnText">
-                                            Continue With Google
-                                        </span>
+                                        Continue With Google
                                     </button>
                                 )}
                             </div>
