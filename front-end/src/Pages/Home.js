@@ -48,6 +48,7 @@ const Home = () => {
                         aboutSection={aboutSection}
                         loginSection={loginSection}
                     />
+                    <h1 className="openingHeading">Welcome to FastTyper...</h1>
                     <div className="btnGrp">
                         <button onClick={createRoom} className="homeButtons">
                             Create Multiplayer

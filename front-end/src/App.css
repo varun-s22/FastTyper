@@ -2,7 +2,7 @@
 :root{
     --green:linear-gradient(#07eb44,#32a852);
     --green-gradient:linear-gradient(#1D976C,#32a852,#93F9B9);
-    --background:linear-gradient(#0f0d0e,#3f423e);
+    --background:linear-gradient(#0f0d0e,#2c2e2b);
     --yellow-hover:#fccc62;
     --yellow:#fcba28;
     --yellow-gradient:linear-gradient(#dbfa8c,#b9f71b);

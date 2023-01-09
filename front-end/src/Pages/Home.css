@@ -104,23 +104,23 @@
     -webkit-background-clip: text;
 }
 .homeButtons{
-    background-image: linear-gradient(to right, #000000 0%, #0f9b0f  51%, #000000  100%);
+    background: var(--profile-section);
     font-family: var(--font-family);
     color: var(--google-btn);
     font-weight: 900;
     font-size: 2vw;
     padding: 4vw;
     border-radius: 15px 150px 30px;
-    border: none;
-    box-shadow: -0.3vw 0.2vw #6b8f68;
+    border: 2px solid var(--yellow);
+    box-shadow: -0.3vw 0.2vw var(--yellow);
     transition: 0.5s;
-    background-size: 200% auto;
     cursor: pointer;
     width: 24vw;
 } 
 .homeButtons:hover {
     background-position: right center;
-    color: #fff;
+    color: var(--yellow-hover);
+    box-shadow: 0vw 0vw 5vw var(--yellow-hover);
     text-decoration: none;
 }
 .btnGrp{
@@ -194,4 +194,11 @@
     color: transparent;
     line-height: 3vw;
     max-width: 30vw;
+}
+.openingHeading{
+    font-family: var(--font-family);
+    color: var(--google-btn);
+    font-weight: 900;
+    font-size: 10vw;
+    padding: 4vw;
 }

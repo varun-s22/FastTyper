@@ -1,8 +1,11 @@
 .NavBar{
-    max-height: 1vh;
     padding: 1%;
     display: flex;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    max-height: 6vh;
+    background: black;
 }
 .actionBtn{
     font-family: var(--typing-font);
